@@ -1,0 +1,16 @@
+{
+  "name": "exclu-api",
+  "version": "1.0.0",
+  "scripts": {
+    "start:build": "bun run build/index.js",
+    "start:dev": "bun run --watch src/index.ts",
+    "build": "bun build src/index.ts --outfile=build/index.js"
+  },
+  "dependencies": {
+    "elysia": "latest"
+  },
+  "devDependencies": {
+    "bun-types": "latest"
+  },
+  "module": "src/index.js"
+}
