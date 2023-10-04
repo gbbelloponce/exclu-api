@@ -7,10 +7,12 @@
     "build": "bun build src/index.ts --outfile=build/index.js"
   },
   "dependencies": {
+    "@prisma/client": "5.3.1",
     "elysia": "latest"
   },
   "devDependencies": {
-    "bun-types": "latest"
+    "bun-types": "latest",
+    "prisma": "5.3.1"
   },
   "module": "src/index.js"
 }
