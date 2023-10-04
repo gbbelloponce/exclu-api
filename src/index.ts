@@ -3,7 +3,6 @@ import { Elysia } from 'elysia'
 import { jwt } from './libs/jwt'
 import { docs } from './libs/docs'
 import { cors } from './libs/cors'
-import { cookies } from './libs/cookies'
 import { auth } from './routes/auth.routes'
 
 // Init App
@@ -12,7 +11,6 @@ const app = new Elysia()
 // Config
 app.use(jwt)
 app.use(cors)
-app.use(cookies)
 app.use(docs)
 
 // Routes
