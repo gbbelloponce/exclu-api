@@ -1,11 +1,13 @@
 import { prisma } from '../libs/prisma'
-import { AuthResponse, RegisterParams } from '../types'
+import { AuthResponse, LoginParams, RegisterParams } from '../types'
 
 import { hashPassword, md5hash } from '../utils/bcrypt'
 
 export class AuthController {
   static identify = async () => {}
-  static login = async () => {}
+  static login = async (params: LoginParams) => {
+    console.log(params)
+  }
 
   /**
    * Register a user given in params
