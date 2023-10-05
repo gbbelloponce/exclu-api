@@ -16,10 +16,8 @@ export type LoginParams = {
     status?: number | HTTPStatusName
   }
   jwt?: {
-    sign: () => any
-    verify: () => any
+    sign: ({ userId: string }) => Promise<string>
   }
-  setCookie?: () => void
 }
 
 export type RegisterParams = {
