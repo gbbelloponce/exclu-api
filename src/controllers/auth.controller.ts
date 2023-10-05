@@ -1,12 +1,60 @@
 import { prisma } from '../libs/prisma'
 import { AuthResponse, LoginParams, RegisterParams } from '../types'
-
-import { hashPassword, md5hash } from '../utils/bcrypt'
+import { hashPassword, comparePassword, md5hash } from '../utils/bcrypt'
 
 export class AuthController {
-  static identify = async () => {}
-  static login = async (params: LoginParams) => {
-    console.log(params)
+  /**
+   * Log In an user given in params by returning an access token
+   */
+  static login = async (params: LoginParams): Promise<AuthResponse> => {
+    const { body, set, jwt } = params
+    const { username, password } = body
+
+    // Check if username exists
+    const user = await prisma.user.findFirst({
+      where: {
+        username,
+      },
+      select: {
+        id: true,
+        password: true,
+        salt: true,
+      },
+    })
+
+    if (!user) {
+      set.status = 400
+      return {
+        success: false,
+        data: null,
+        message: 'Username does not exists.',
+      }
+    }
+
+    // Check if password match
+    const match = await comparePassword(password, user.salt, user.password)
+    if (!match) {
+      set.status = 400
+      return {
+        success: false,
+        data: null,
+        message: 'Invalid credentials',
+      }
+    }
+
+    // Create JWT and return it via headers
+    const accessToken = await jwt!.sign({
+      userId: user.id,
+    })
+    set.headers = {
+      Authorization: accessToken,
+    }
+
+    return {
+      success: true,
+      data: null,
+      message: 'Logged In successfully.',
+    }
   }
 
   /**

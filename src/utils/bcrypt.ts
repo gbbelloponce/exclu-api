@@ -14,6 +14,21 @@ export const hashPassword = async (
   })
 }
 
+export const comparePassword = async (
+  password: string,
+  salt: string,
+  passwordHash: string
+): Promise<boolean> => {
+  return new Promise((resolve, reject) => {
+    pbkdf2(password, salt, 1000, 64, 'sha512', (error, derivedKey) => {
+      if (error) {
+        return reject(error)
+      }
+      return resolve(passwordHash === derivedKey.toString('hex'))
+    })
+  })
+}
+
 export const md5hash = (text: string) => {
   return new Bun.CryptoHasher('md5').update(text).digest('hex')
 }
