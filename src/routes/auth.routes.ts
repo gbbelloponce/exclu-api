@@ -1,5 +1,6 @@
 import Elysia, { t } from 'elysia'
 
+import { isAuthenticated } from '../middlewares/auth'
 import { AuthController } from '../controllers/auth.controller'
 
 export const auth = (app: Elysia) => {
@@ -30,6 +31,12 @@ export const auth = (app: Elysia) => {
     })
 
     return app
+  })
+
+  app.use(isAuthenticated)
+  app.get('hola/', ({ currentUser }) => {
+    console.log(currentUser)
+    return 'Authenticated'
   })
 
   return app
