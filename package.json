@@ -7,15 +7,12 @@
     "build": "bun build src/index.ts --outfile=build/index.js"
   },
   "dependencies": {
-    "@elysiajs/cors": "0.7.1",
-    "@elysiajs/jwt": "0.7.0",
-    "@elysiajs/swagger": "0.7.3",
-    "@prisma/client": "latest",
-    "elysia": "latest"
+    "@prisma/client": "5.5.2",
+    "hono": "3.9.0"
   },
   "devDependencies": {
     "bun-types": "latest",
-    "prisma": "latest"
+    "prisma": "5.5.2"
   },
   "module": "src/index.js"
 }
