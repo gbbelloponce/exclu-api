@@ -1,14 +1,14 @@
 import { Hono } from 'hono'
 
+import { auth } from './routes/auth.routes'
+
 // Init App
 const app = new Hono()
 
 // Config
 
 // Routes
-app.get('/', (c) => {
-  return c.text('Hello Hono')
-})
+app.route('/auth', auth)
 
 // Run App
 export default {
