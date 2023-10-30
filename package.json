@@ -2,16 +2,17 @@
   "name": "exclu-api",
   "version": "1.0.0",
   "scripts": {
-    "start:build": "bun run build/index.js",
-    "start:dev": "bun run --watch src/index.ts",
-    "build": "bun build src/index.ts --outfile=build/index.js"
+    "start:build": "bun build/index.js",
+    "start:dev": "bun --watch src/index.ts",
+    "build": "bun bundler.ts",
+    "prisma:migrate": "bunx prisma migrate dev"
   },
   "dependencies": {
     "@prisma/client": "5.5.2",
     "hono": "3.9.0"
   },
   "devDependencies": {
-    "bun-types": "latest",
+    "bun-types": "1.0.7",
     "prisma": "5.5.2"
   },
   "module": "src/index.js"
