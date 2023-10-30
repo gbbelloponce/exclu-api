@@ -1,8 +1,10 @@
 declare module 'bun' {
   interface Env {
     [key: string]: string | undefined
-    // Add enviroment variables
+    // Env variables
     NODE_ENV: string
     SERVER_PORT: number
+    CLIENT_URL: string
+    JWT_SECRET: string
   }
 }
