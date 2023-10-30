@@ -1,13 +1,41 @@
+import { sign } from 'hono/jwt'
+
 import { UserModel } from '../models/users'
 import { BaseController } from './base.controller'
 import { LoginBody, RegisterBody } from '../types'
-import { hashPassword, md5hash } from '../utils/bcrypt'
+import { comparePassword, hashPassword, md5hash } from '../utils/bcrypt'
 
 export class AuthController extends BaseController {
   public login = async (body: LoginBody) => {
-    return this.responseError({
+    const { username, password } = body
+
+    // Check username
+    const user = await UserModel.getByUsername(username)
+    if (!user) {
+      return this.responseError({
+        data: null,
+        message: 'Username does not exists.',
+      })
+    }
+
+    // Check password
+    const passwordMatch = await comparePassword(
+      password,
+      user.salt,
+      user.password
+    )
+    if (!passwordMatch) {
+      return this.responseError({ data: null, message: 'Invalid credentials.' })
+    }
+
+    // Create access token
+    const accessToken = await sign(user.id, Bun.env.JWT_SECRET)
+    return this.responseOK({
       data: null,
-      message: 'Something went wrong!',
+      message: 'Logged in successfully!',
+      headers: {
+        Authorization: accessToken,
+      },
     })
   }
 
