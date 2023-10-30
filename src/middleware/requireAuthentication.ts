@@ -1,8 +1,8 @@
 import { verify } from 'hono/jwt'
 import { HTTPException } from 'hono/http-exception'
 
+import { UserModel } from '../models/user'
 import { CustomMiddleware } from '../types'
-import { UserModel } from '../models/users'
 import { isTokenValid, parseToken } from '../utils/auth'
 
 export const requireAuthentication: CustomMiddleware = async (c, next) => {

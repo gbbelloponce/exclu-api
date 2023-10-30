@@ -1,5 +1,5 @@
 import { prisma } from '../libs/prisma'
-import { CreateUserParams } from '../types'
+import { CreateUserParams, EditUserParams } from '../types'
 
 export class UserModel {
   static getAll = async () => {}

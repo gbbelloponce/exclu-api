@@ -1,6 +1,6 @@
 import { sign } from 'hono/jwt'
 
-import { UserModel } from '../models/users'
+import { UserModel } from '../models/user'
 import { BaseController } from './base.controller'
 import { LoginBody, RegisterBody } from '../types'
 import { comparePassword, hashPassword, md5hash } from '../utils/bcrypt'
