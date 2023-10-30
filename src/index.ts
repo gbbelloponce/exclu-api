@@ -1,24 +1,21 @@
-import { Elysia } from 'elysia'
+import { Hono } from 'hono'
 
-import { jwt } from './libs/jwt'
-import { docs } from './libs/docs'
-import { cors } from './libs/cors'
+import { cors } from './middleware/cors'
 import { auth } from './routes/auth.routes'
+import { requireAuthentication } from './middleware/requireAuthentication'
 
 // Init App
-const app = new Elysia()
+const app = new Hono()
 
 // Config
-app.use(jwt)
-app.use(cors)
-app.use(docs)
+app.use('*', cors)
+app.use('*', requireAuthentication)
 
 // Routes
-app.use(auth)
+app.route('/auth', auth)
 
 // Run App
-app.listen(Bun.env.SERVER_PORT || 3000, () => {
-  console.log(
-    `Server is running at http://${app.server?.hostname}:${app.server?.port}`
-  )
-})
+export default {
+  fetch: app.fetch,
+  port: Bun.env.SERVER_PORT,
+}

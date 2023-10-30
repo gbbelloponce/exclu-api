@@ -1,50 +1,20 @@
-import { type HTTPStatusName } from 'elysia/dist/utils'
+import { Context, Next } from 'hono'
+import { User } from '@prisma/client'
 
-export type AuthResponse = {
-  success: boolean
+export type IResponse = {
   data: any
   message: string
+  status?: number
+  headers?: Record<string, string | string[]>
 }
 
-export type LoginParams = {
-  body: {
-    username: string
-    password: string
-  }
-  set: {
-    headers: Record<string, string>
-    status?: number | HTTPStatusName
-  }
-  jwt?: {
-    sign: ({ userId: string }) => Promise<string>
-  }
-}
+export type CreateUserParams = Omit<User, 'id' | 'createdAt'>
 
-export type RegisterParams = {
-  body: {
-    name: string
-    username: string
-    email: string
-    password: string
-  }
-  set: {
-    headers: Record<string, string>
-    status?: number | HTTPStatusName
-  }
-}
+export type RegisterBody = Pick<
+  User,
+  'name' | 'username' | 'email' | 'password'
+>
 
-export type IsAuthenticatedParams = {
-  request: {
-    method: string
-    url: string
-    headers: Headers
-  }
-  set: {
-    headers: Record<string, string>
-    status?: number | HTTPStatusName
-  }
-  jwt?: {
-    sign: ({ userId: string }) => Promise<string>
-    verify: (token: string) => Promise<{ userId: string }>
-  }
-}
+export type LoginBody = Pick<User, 'username' | 'password'>
+
+export type CustomMiddleware = (c: Context, next: Next) => Promise<void>
