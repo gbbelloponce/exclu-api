@@ -1,3 +1,4 @@
+import { Context, Next } from 'hono'
 import { User } from '@prisma/client'
 
 export type IResponse = {
@@ -15,3 +16,5 @@ export type RegisterBody = Pick<
 >
 
 export type LoginBody = Pick<User, 'username' | 'password'>
+
+export type CustomMiddleware = (c: Context, next: Next) => Promise<void>

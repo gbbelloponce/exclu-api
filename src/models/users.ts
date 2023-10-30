@@ -4,7 +4,13 @@ import { CreateUserParams } from '../types'
 export class UserModel {
   static getAll = async () => {}
 
-  static getById = async (id: string) => {}
+  static getById = async (id: string) => {
+    return await prisma.user.findUnique({
+      where: {
+        id,
+      },
+    })
+  }
 
   static getByUsername = async (username: string) => {
     return await prisma.user.findUnique({
