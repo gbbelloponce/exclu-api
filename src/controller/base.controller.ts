@@ -1,27 +1,27 @@
-import { IResponse } from '../types'
+import { ResponseFunction } from '../types'
 
 export abstract class BaseController {
-  protected responseOK = ({
+  protected responseOK: ResponseFunction = ({
     data,
-    message,
+    message = undefined,
     status = 200,
     headers = undefined,
-  }: IResponse) => ({
+  }) => ({
     status,
     headers,
     object: {
-      success: false,
+      success: true,
       data,
       message,
     },
   })
 
-  protected responseError = ({
-    data,
-    message,
+  protected responseError: ResponseFunction = ({
+    data = undefined,
+    message = undefined,
     status = 400,
     headers = undefined,
-  }: IResponse) => ({
+  }) => ({
     status,
     headers,
     object: {

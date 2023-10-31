@@ -1,14 +1,31 @@
 import { Context, Next } from 'hono'
-import { User } from '@prisma/client'
+import { Post, User } from '@prisma/client'
 
-export type IResponse = {
+export type ResponseFunction = ({}: {
   data: any
-  message: string
+  message?: string
   status?: number
   headers?: Record<string, string | string[]>
+}) => HonoResponse
+
+export type HonoResponse = {
+  status?: number
+  headers?: Record<string, string | string[]>
+  object: {
+    data: any
+    message?: string
+  }
 }
 
 export type CreateUserParams = Omit<User, 'id' | 'createdAt'>
+
+export type EditUserParams = Partial<Omit<User, 'createdAt'>>
+
+export type CreatePostParams = Omit<Post, 'id' | 'createdAt' | 'edited'>
+
+export type EditPostParams = Partial<
+  Omit<Post, 'createdAt' | 'edited' | 'userId'>
+>
 
 export type RegisterBody = Pick<
   User,
