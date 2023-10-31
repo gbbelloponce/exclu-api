@@ -2,6 +2,7 @@ import { Hono } from 'hono'
 
 import { cors } from './middleware/cors'
 import { auth } from './routes/auth.routes'
+import { posts } from './routes/posts.routes'
 import { requireAuthentication } from './middleware/requireAuthentication'
 
 // Init App
@@ -13,6 +14,7 @@ app.use('*', requireAuthentication)
 
 // Routes
 app.route('/auth', auth)
+app.route('/posts', posts)
 
 // Run App
 export default {
