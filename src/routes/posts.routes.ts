@@ -1,7 +1,7 @@
 import { Hono } from 'hono'
 
-import { CreatePostParams, EditPostParams } from '../types'
 import { PostsController } from '../controller/posts.controller'
+import { CreatePostParams, EditPostParams, DeletePostParams } from '../types'
 
 // Create router and its controller
 export const posts = new Hono()
@@ -21,5 +21,10 @@ posts
   .patch('/', async ({ req, json }) => {
     const body = await req.json<EditPostParams>()
     const { object, status, headers } = await postsController.update(body)
+    return json(object, status, headers)
+  })
+  .delete('/', async ({ req, json }) => {
+    const body = await req.json<DeletePostParams>()
+    const { object, status, headers } = await postsController.delete(body)
     return json(object, status, headers)
   })

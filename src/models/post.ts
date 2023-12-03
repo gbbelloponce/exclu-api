@@ -1,5 +1,5 @@
 import { prisma } from '../libs/prisma'
-import { CreatePostParams, EditPostParams } from '../types'
+import { CreatePostParams, EditPostParams, DeletePostParams } from '../types'
 
 export class PostModel {
   static getAll = async () => {
@@ -31,6 +31,14 @@ export class PostModel {
       data: {
         text,
         edited: true,
+      },
+    })
+  }
+
+  static delete = async ({ id }: DeletePostParams) => {
+    return await prisma.post.delete({
+      where: {
+        id,
       },
     })
   }

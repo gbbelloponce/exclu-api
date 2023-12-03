@@ -27,6 +27,10 @@ export type EditPostParams = Partial<
   Omit<Post, 'createdAt' | 'edited' | 'userId'>
 >
 
+export type DeletePostParams = {
+  id: string
+}
+
 export type RegisterBody = Pick<
   User,
   'name' | 'username' | 'email' | 'password'

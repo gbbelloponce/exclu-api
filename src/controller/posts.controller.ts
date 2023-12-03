@@ -1,6 +1,6 @@
 import { PostModel } from '../models/post'
 import { BaseController } from './base.controller'
-import { CreatePostParams, EditPostParams } from '../types'
+import { CreatePostParams, EditPostParams, DeletePostParams } from '../types'
 
 export class PostsController extends BaseController {
   public getAll = async () => {
@@ -56,6 +56,26 @@ export class PostsController extends BaseController {
     return this.responseOK({
       data: post,
       message: 'Post updated successfully!',
+    })
+  }
+
+  public delete = async (body: DeletePostParams) => {
+    const { id } = body
+
+    // Validate body
+    if (!id) {
+      return this.responseError({
+        data: null,
+        message: 'The post must have an identifier!',
+      })
+    }
+
+    // Update
+    await PostModel.delete({ id })
+
+    return this.responseOK({
+      data: true,
+      message: 'Post deleted successfully',
     })
   }
 }
