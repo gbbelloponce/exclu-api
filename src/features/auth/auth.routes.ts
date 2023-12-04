@@ -1,7 +1,7 @@
 import { Hono } from 'hono'
 
-import { LoginBody, RegisterBody } from '../types'
-import { AuthController } from '../controller/auth.controller'
+import { LoginBody, RegisterBody } from '@common/types'
+import { AuthController } from '@features/auth/auth.controller'
 
 // Create router and its controller
 export const auth = new Hono()

@@ -1,9 +1,9 @@
 import { Hono } from 'hono'
 
-import { cors } from './middleware/cors'
-import { auth } from './routes/auth.routes'
-import { posts } from './routes/posts.routes'
-import { requireAuthentication } from './middleware/requireAuthentication'
+import { cors } from '@src/libs/cors'
+import { auth } from '@features/auth/auth.routes'
+import { posts } from '@features/posts/posts.routes'
+import { requireAuthentication } from '@features/auth/auth.middleware'
 
 // Init App
 const app = new Hono()

@@ -1,7 +1,11 @@
 import { Hono } from 'hono'
 
-import { PostsController } from '../controller/posts.controller'
-import { CreatePostParams, EditPostParams, DeletePostParams } from '../types'
+import {
+  CreatePostParams,
+  EditPostParams,
+  DeletePostParams,
+} from '@common/types'
+import { PostsController } from '@features/posts/posts.controller'
 
 // Create router and its controller
 export const posts = new Hono()

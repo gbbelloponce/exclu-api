@@ -1,9 +1,9 @@
 import { sign } from 'hono/jwt'
 
-import { UserModel } from '../models/user'
-import { BaseController } from './base.controller'
-import { LoginBody, RegisterBody } from '../types'
-import { comparePassword, hashPassword, md5hash } from '../utils/bcrypt'
+import { UserModel } from '@features/auth/user.model'
+import { LoginBody, RegisterBody } from '@common/types'
+import { BaseController } from '@common/controllers/base.controller'
+import { comparePassword, hashPassword, md5hash } from '@features/auth/utils'
 
 export class AuthController extends BaseController {
   public login = async (body: LoginBody) => {

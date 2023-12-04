@@ -1,6 +1,10 @@
-import { PostModel } from '../models/post'
-import { BaseController } from './base.controller'
-import { CreatePostParams, EditPostParams, DeletePostParams } from '../types'
+import {
+  EditPostParams,
+  DeletePostParams,
+  CreatePostParams,
+} from '@common/types'
+import { PostModel } from '@features/posts/post.model'
+import { BaseController } from '@common/controllers/base.controller'
 
 export class PostsController extends BaseController {
   public getAll = async () => {

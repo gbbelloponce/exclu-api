@@ -1,5 +1,9 @@
-import { prisma } from '../libs/prisma'
-import { CreatePostParams, EditPostParams, DeletePostParams } from '../types'
+import {
+  CreatePostParams,
+  EditPostParams,
+  DeletePostParams,
+} from '@common/types'
+import { prisma } from '@common/lib/prisma'
 
 export class PostModel {
   static getAll = async () => {

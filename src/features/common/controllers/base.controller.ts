@@ -1,4 +1,4 @@
-import { ResponseFunction } from '../types'
+import { ResponseFunction } from '@common/types'
 
 export abstract class BaseController {
   protected responseOK: ResponseFunction = ({
